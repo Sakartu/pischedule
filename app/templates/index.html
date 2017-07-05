@@ -6,44 +6,48 @@
         <tr>
             <th>Name</th>
             <th>Commandline</th>
-            <th>Day</th>
-            <th>Start</th>
-            <th>Stop</th>
+            <th>Schedule</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         {% for schedule in schedules %}
             <tr>
             <td>
-                <a href="{{ url_for("edit_schedule", schedule_id=schedule.id) }}">{{ schedule.name }}</a><a href="/del/{{ schedule.id }}"><span class="glyphicon glyphicon-trash"></span></a>
+                <span>{{ schedule.name }}</span>
             </td>
             <td>
                 <span>{{ schedule.commandline }}</span>
             </td>
             <td>
-                <span>{{ schedule.runs.0.day|to_day }}</span>
+                <table class="table table-condensed table-borderless">
+                <tr>
+                    <td>Day</td>
+                    <td>Start</td>
+                    <td>Stop</td>
+                </tr>
+                {% for run in schedule.runs %}
+                    <tr>
+                        <td>
+                            {{ run.day|to_day }}
+                        </td>
+                        <td>
+                            {{ "%02d:%02d"|format(run.start.hour, run.start.minute) }}
+                        </td>
+                        <td>
+                            {{ "%02d:%02d"|format(run.stop.hour, run.stop.minute) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
             </td>
             <td>
-                <span>{{ "%02d:%02d"|format(schedule.runs.0.start.hour, schedule.runs.0.start.minute) }}</span>
+                <a href="{{ url_for("edit_schedule", schedule_id=schedule.id) }}"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</a>
             </td>
             <td>
-                <span>{{ "%02d:%02d"|format(schedule.runs.0.stop.hour, schedule.runs.0.stop.minute) }}</span>
+                <a href="/del/{{ schedule.id }}"><span class="glyphicon glyphicon-trash"></span>&nbsp;Delete</a>
             </td>
             </tr>
-            {% for run in schedule.runs[1:] %}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <span>{{ run.day|to_day }}</span>
-                    </td>
-                    <td>
-                        <span>{{ "%02d:%02d"|format(run.start.hour, run.start.minute) }}</span>
-                    </td>
-                    <td>
-                        <span>{{ "%02d:%02d"|format(run.stop.hour, run.stop.minute)}}</span>
-                    </td>
-                </tr>
-            {% endfor %}
         {% endfor %}
         </table>
     {% else %}
