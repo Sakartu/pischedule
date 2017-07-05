@@ -14,7 +14,7 @@
         {% for schedule in schedules %}
             <tr>
             <td>
-                <a href="{{ url_for("edit_schedule", schedule_id=schedule.id) }}">{{ schedule.name }}</a>
+                <a href="{{ url_for("edit_schedule", schedule_id=schedule.id) }}">{{ schedule.name }}</a><a href="/del/{{ schedule.id }}"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
             <td>
                 <span>{{ schedule.commandline }}</span>

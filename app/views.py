@@ -38,6 +38,14 @@ def edit_schedule(schedule_id):
     return render_template('show.html', add_schedule=False, form=form)
 
 
+@app.route('/del/<int:schedule_id>', methods=['GET'])
+def del_schedule(schedule_id):
+    schedule = WeekSchedule.query.get_or_404(schedule_id)
+    db.session.delete(schedule)
+    db.session.commit()
+    return redirect(url_for('show_schedules'))
+
+
 def handle_run_deletion(form):
     # Yes this is slightly ugly, but due to the queue-like nature of FieldList there's no cleaner way
     modified = False
@@ -70,7 +78,9 @@ def handle_run_addition(form):
         return False
 
 
-def update_schedule(form, schedule=WeekSchedule()):
+def update_schedule(form, schedule=None):
+    if not schedule:
+        schedule = WeekSchedule()
     schedule.name = form.name.data
     schedule.commandline = form.commandline.data
     for r in form.runs:
