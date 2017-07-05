@@ -14,11 +14,21 @@
             </div>
         </div>
 
-        <div class="form-group {% if form.commandline.errors %}has-error{% endif %}">
-            <label for="{{ form.commandline.id }}" class="col-sm-2 control-label">{{ form.commandline.label() }}</label>
+        <div class="form-group {% if form.start_cmd.errors %}has-error{% endif %}">
+            <label for="{{ form.start_cmd.id }}" class="col-sm-2 control-label">{{ form.start_cmd.label() }}</label>
             <div class="col-sm-4">
-                {{ form.commandline(class="form-control") }}
-                {% for error in form.commandline.errors %}
+                {{ form.start_cmd(class="form-control") }}
+                {% for error in form.start_cmd.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="form-group {% if form.stop_cmd.errors %}has-error{% endif %}">
+            <label for="{{ form.stop_cmd.id }}" class="col-sm-2 control-label">{{ form.stop_cmd.label() }}</label>
+            <div class="col-sm-4">
+                {{ form.stop_cmd(class="form-control") }}
+                {% for error in form.stop_cmd.errors %}
                     {{ error }}
                 {% endfor %}
             </div>

@@ -19,7 +19,7 @@ def show_schedules():
 def add_schedule():
     form = WeekScheduleForm()
     runs_modified = handle_run_deletion(form) or handle_run_addition(form)
-    # If the form is correct (has a name, commandline and one or more Run's, we save it
+    # If the form is correct (has a name, commands and one or more Run's, we save it
     if not runs_modified and form.validate_on_submit():
         update_schedule(form)
         return redirect(url_for('show_schedules'))
@@ -82,7 +82,8 @@ def update_schedule(form, schedule=None):
     if not schedule:
         schedule = WeekSchedule()
     schedule.name = form.name.data
-    schedule.commandline = form.commandline.data
+    schedule.start_cmd = form.start_cmd.data
+    schedule.stop_cmd = form.stop_cmd.data
     for r in form.runs:
         start = datetime.datetime.strptime(r.start.data, '%H:%M').time()
         stop = datetime.datetime.strptime(r.stop.data, '%H:%M').time()

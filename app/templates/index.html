@@ -5,7 +5,8 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Commandline</th>
+            <th>Start command</th>
+            <th>Stop command</th>
             <th>Schedule</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -17,7 +18,10 @@
                 <span>{{ schedule.name }}</span>
             </td>
             <td>
-                <span>{{ schedule.commandline }}</span>
+                <span>{{ schedule.start_cmd }}</span>
+            </td>
+            <td>
+                <span>{{ schedule.stop_cmd }}</span>
             </td>
             <td>
                 <table class="table table-condensed table-borderless">

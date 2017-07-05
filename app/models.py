@@ -4,7 +4,8 @@ from app import db
 class WeekSchedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
-    commandline = db.Column(db.String())
+    start_cmd = db.Column(db.String())
+    stop_cmd = db.Column(db.String())
     runs = db.relationship('Run', lazy='dynamic', cascade="delete, delete-orphan")
 
 

@@ -13,8 +13,9 @@ class RunForm(Form):
 
 
 class WeekScheduleForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()], default='foo')
-    commandline = StringField('Commandline', validators=[DataRequired()], default='bar')
+    name = StringField('Name', validators=[DataRequired()])
+    start_cmd = StringField('Start command', validators=[DataRequired()])
+    stop_cmd = StringField('Stop command', validators=[DataRequired()])
     runs = FieldList(FormField(RunForm), min_entries=1, max_entries=10)
     add_run = SubmitField()
 
