@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if form %}
+    <form action="" method="POST" role="form" class="form-horizontal">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="{{ form.name.id }}" class="col-sm-2 control-label">{{ form.name.label() }}</label>
+            <div class="col-sm-2">
+                {{ form.name(class="form-control") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.commandline.id }}" class="col-sm-2 control-label">{{ form.commandline.label() }}</label>
+            <div class="col-sm-4">
+                {{ form.commandline(class="form-control") }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <h4>Scheduled program runs</h4>
+                <table class="table">
+                    <tr>
+                        <th>Day</th>
+                        <th>Start</th>
+                        <th>Stop</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for run in form.runs %}
+                        <tr>
+                            <td>{{ run.form.day(class="form-control") }}</td>
+                            <td>{{ run.form.start(class="form-control") }}</td>
+                            <td>{{ run.form.stop(class="form-control") }}</td>
+                            <td>{{ run.form.del_run(class="btn btn-danger") }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {{ form.add_run(class="btn btn-default") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+{% endblock %}
+{% block extra_script %}
+    <script type="text/javascript">
+        $(function () {
+            for(i=0; i < {{ form.runs|length }}; i++){
+                $('#runs-' + i + '-start').datetimepicker({
+                    format: 'HH:mm',
+                    stepping: 15
+                });
+                $('#runs-' + i + '-stop').datetimepicker({
+                    format: 'HH:mm',
+                    stepping: 15
+                });
+            }
+        });
+    </script>
+{% endblock %}
