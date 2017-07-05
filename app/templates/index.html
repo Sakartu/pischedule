@@ -57,5 +57,5 @@
     {% else %}
         <span>No schedules yet!</span>
     {% endif %}
-    <a href="/add" class="btn btn-primary">Add schedule</a>
+    <a href="{{ url_for("add_schedule") }}" class="btn btn-primary">Add schedule</a>
 {% endblock %}
