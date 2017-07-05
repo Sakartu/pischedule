@@ -11,6 +11,6 @@ class WeekSchedule(db.Model):
 class Run(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.Integer())
-    time = db.Column(db.Time())
-    run_for = db.Column(db.Interval())
+    start = db.Column(db.Time())
+    stop = db.Column(db.Time())
     schedule_id = db.Column(db.Integer, db.ForeignKey('week_schedule.id'))

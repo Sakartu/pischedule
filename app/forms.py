@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm, validators
-from wtforms import StringField, BooleanField, FieldList, FormField, SelectField, IntegerField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, BooleanField, FieldList, FormField, SelectField, IntegerField, SubmitField, Form
+from wtforms.validators import DataRequired, Length, NumberRange
 
 
-class RunForm(FlaskForm):
-    day = SelectField('Day', choices=((0, 'Monday'), (1, 'Tuesday'), (2, 'Wednesday'), (3, 'Thursday'), (4, 'Friday'), (5, 'Saturday'), (6, 'Sunday')))
+class RunForm(Form):
+    day = SelectField('Day', choices=[(0, 'Monday'), (1, 'Tuesday'), (2, 'Wednesday'), (3, 'Thursday'), (4, 'Friday'), (5, 'Saturday'), (6, 'Sunday')], validators=[NumberRange(0, 6)], coerce=int, default=0)
     start = StringField('Start', validators=[DataRequired()], default='00:00')
     stop = StringField('Stop', validators=[DataRequired()], default='00:00')
     del_run = SubmitField('Delete')

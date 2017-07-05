@@ -1,8 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for schedule in schedules %}
-        <a href="/show/{{ schedule.id }}">{{ schedule.name }}</a>
+    {% if schedules %}
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Commandline</th>
+            <th>Day</th>
+            <th>Start</th>
+            <th>Stop</th>
+        </tr>
+        </thead>
+        {% for schedule in schedules %}
+            <tr>
+            <td>
+                <a href="{{ url_for("edit_schedule", schedule_id=schedule.id) }}">{{ schedule.name }}</a>
+            </td>
+            <td>
+                <span>{{ schedule.commandline }}</span>
+            </td>
+            <td>
+                <span>{{ schedule.runs.0.day|to_day }}</span>
+            </td>
+            <td>
+                <span>{{ "%02d:%02d"|format(schedule.runs.0.start.hour, schedule.runs.0.start.minute) }}</span>
+            </td>
+            <td>
+                <span>{{ "%02d:%02d"|format(schedule.runs.0.stop.hour, schedule.runs.0.stop.minute) }}</span>
+            </td>
+            </tr>
+            {% for run in schedule.runs[1:] %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <span>{{ run.day|to_day }}</span>
+                    </td>
+                    <td>
+                        <span>{{ "%02d:%02d"|format(run.start.hour, run.start.minute) }}</span>
+                    </td>
+                    <td>
+                        <span>{{ "%02d:%02d"|format(run.stop.hour, run.stop.minute)}}</span>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </table>
     {% else %}
         No schedules yet!
-    {% endfor %}
+    {% endif %}
 {% endblock %}

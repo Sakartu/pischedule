@@ -4,17 +4,23 @@
     <form action="" method="POST" role="form" class="form-horizontal">
         {{ form.hidden_tag() }}
 
-        <div class="form-group">
+        <div class="form-group {% if form.name.errors %}has-error{% endif %}">
             <label for="{{ form.name.id }}" class="col-sm-2 control-label">{{ form.name.label() }}</label>
             <div class="col-sm-2">
                 {{ form.name(class="form-control") }}
+                {% for error in form.name.errors %}
+                    {{ error }}
+                {% endfor %}
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group {% if form.commandline.errors %}has-error{% endif %}">
             <label for="{{ form.commandline.id }}" class="col-sm-2 control-label">{{ form.commandline.label() }}</label>
             <div class="col-sm-4">
                 {{ form.commandline(class="form-control") }}
+                {% for error in form.commandline.errors %}
+                    {{ error }}
+                {% endfor %}
             </div>
         </div>
         <div class="form-group">
@@ -42,7 +48,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-8">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{% if add_schedule %}Add{% else %}Save{% endif %}</button>
             </div>
         </div>
     </form>
