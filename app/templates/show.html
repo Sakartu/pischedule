@@ -35,6 +35,7 @@
                     </tr>
                     {% for run in form.runs %}
                         <tr>
+                            {{ run.form.id }}
                             <td>{{ run.form.day(class="form-control") }}</td>
                             <td>{{ run.form.start(class="form-control") }}</td>
                             <td>{{ run.form.stop(class="form-control") }}</td>

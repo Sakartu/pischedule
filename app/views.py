@@ -29,12 +29,12 @@ def add_schedule():
 
 @app.route('/edit/<int:schedule_id>', methods=['GET', 'POST'])
 def edit_schedule(schedule_id):
-    schedule = WeekSchedule.query.filter_by(id=schedule_id).first()
+    schedule = WeekSchedule.query.get_or_404(schedule_id)
     form = WeekScheduleForm(obj=schedule)
     runs_modified = handle_run_deletion(form) or handle_run_addition(form)
     if not runs_modified and form.validate_on_submit():
         update_schedule(form, schedule)
-        return redirect('/edit/{0}'.format(schedule.id))
+        return redirect(url_for('show_schedules'))
     return render_template('show.html', add_schedule=False, form=form)
 
 
@@ -73,13 +73,14 @@ def handle_run_addition(form):
 def update_schedule(form, schedule=WeekSchedule()):
     schedule.name = form.name.data
     schedule.commandline = form.commandline.data
-    for r in schedule.runs:
-        db.session.delete(r)
     for r in form.runs:
         start = datetime.datetime.strptime(r.start.data, '%H:%M').time()
         stop = datetime.datetime.strptime(r.stop.data, '%H:%M').time()
-        run = Run(day=r.day.data, start=start, stop=stop)
-        schedule.runs.append(run)
+        run = Run.query.filter_by(id=r.data['id']).one_or_none()
+        if not run:
+            # Doesn't exist yet, so we have to create it and add it to schedule
+            run = Run(day=r.day.data, start=start, stop=stop)
+            schedule.runs.append(run)
         db.session.add(run)
     db.session.add(schedule)
     db.session.commit()
