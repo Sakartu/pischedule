@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, NumberRange
 
 class RunForm(Form):
     id = HiddenField()
-    day = SelectField('Day', choices=[(0, 'Monday'), (1, 'Tuesday'), (2, 'Wednesday'), (3, 'Thursday'), (4, 'Friday'), (5, 'Saturday'), (6, 'Sunday')], validators=[NumberRange(0, 6)], coerce=int, default=0)
+    day = SelectField('Day', choices=[(1, 'Monday'), (2, 'Tuesday'), (3, 'Wednesday'), (4, 'Thursday'), (5, 'Friday'), (6, 'Saturday'), (7, 'Sunday')], validators=[NumberRange(1, 7)], coerce=int, default=0)
     start = StringField('Start', validators=[DataRequired()], default='00:00')
     stop = StringField('Stop', validators=[DataRequired()], default='00:00')
     del_run = SubmitField('Delete')
