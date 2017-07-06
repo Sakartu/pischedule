@@ -1,7 +1,6 @@
-from flask_wtf import FlaskForm, validators
-from wtforms import StringField, BooleanField, FieldList, FormField, SelectField, IntegerField, SubmitField, Form, \
-    HiddenField
-from wtforms.validators import DataRequired, Length, NumberRange
+from flask_wtf import FlaskForm
+from wtforms import StringField, FieldList, FormField, SelectField, SubmitField, Form, HiddenField
+from wtforms.validators import DataRequired, NumberRange
 
 
 class RunForm(Form):

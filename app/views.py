@@ -1,11 +1,9 @@
-import calendar
 import datetime
 
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, flash
 
 from app import app, db
 from app.forms import WeekScheduleForm
-
 from app.models import WeekSchedule, Run
 
 
