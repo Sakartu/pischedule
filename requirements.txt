@@ -3,3 +3,4 @@ flask-wtf
 uwsgi
 flask-sqlalchemy
 sqlalchemy-migrate
+docopt
