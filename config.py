@@ -1,7 +1,7 @@
 import os
 
 WTF_CSRF_ENABLED = True
-SECRET_KEY = 'tM/5JSQUy&OyYG8)dDFuJ{G?LXR&G}'
+SECRET_KEY = ''
 DEBUG = True
 basedir = os.path.abspath(os.path.dirname(__file__))
 
