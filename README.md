@@ -8,12 +8,12 @@ Besides the latest version of python3, a number of separate packages is required
 If you want to run pischedule using a normal webserver (Apache, lighttpd or nginx), a wsgi file and uwsgi ini file are supplied.
 Refer to the many available uwsgi setup tutorials for your specific operating system flavour.
 
-#### Using pip
+#### Install dependencies using pip
 ```
 pip3 install -r requirements.txt
 ```
 
-#### Manual
+#### Install dependencies manually
 Install the following packages manually:
 * flask
 * flask-wtf
