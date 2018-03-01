@@ -40,3 +40,8 @@ python3 run.py
 ```
 
 If you're ready to run the server without development settings, open up config.py once more and set ```DEBUG = False``` to disable debugging.
+
+
+## Setting jobs for specific users
+
+The webfrontend only maintains database entries; which user will actually be running the commands programmed is up to you. By running the supplied ```run_tasks.py``` file, the crontab for the current user is updated with all start/stop entries from the database. It's probably a good idea to run the ```run_tasks.py``` script every once in a while using cron itself, so the crontab remains in sync with the database.
