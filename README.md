@@ -23,7 +23,7 @@ Install the following packages manually:
 * docopt
 
 ## Setup
-Before running, you should create a database using ```db_create.py```. With that done, it's time to create a secret key
+Before running, you should create a database using ```db_create.py``` and then ```db_migrate.py```. With that done, it's time to create a secret key
 for your application. This key is used to secure sessions, etc. Open a python console and run:
 ```python
 import os
