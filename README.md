@@ -23,13 +23,14 @@ Install the following packages manually:
 * docopt
 
 ## Setup
-Before running, you should create a database using ```db_create.py``` and then ```db_migrate.py```. With that done, it's time to create a secret key
-for your application. This key is used to secure sessions, etc. Open a python console and run:
+Before running, you should set a secret key. Open a python console and run:
 ```python
 import os
 os.urandom(24)
 ```
-Copy the resulting (byte)string, open config.py and paste the copied value as a value for SECRET_KEY.
+Copy the resulting (byte)string, open config.py and paste the copied value as a value for SECRET_KEY. 
+
+Then you should create a database using ```db_create.py``` and then ```db_migrate.py```.
 
 ## Running
 You can easily start a development server using:
