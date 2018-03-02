@@ -44,6 +44,24 @@ def del_schedule(schedule_id):
     return redirect(url_for('show_schedules'))
 
 
+@app.route('/enable/<int:schedule_id>', methods=['GET'])
+def enable_schedule(schedule_id):
+    schedule = WeekSchedule.query.get_or_404(schedule_id)
+    schedule.enabled = True
+    db.session.add(schedule)
+    db.session.commit()
+    return redirect(url_for('show_schedules'))
+
+
+@app.route('/disable/<int:schedule_id>', methods=['GET'])
+def disable_schedule(schedule_id):
+    schedule = WeekSchedule.query.get_or_404(schedule_id)
+    schedule.enabled = False
+    db.session.add(schedule)
+    db.session.commit()
+    return redirect(url_for('show_schedules'))
+
+
 def handle_run_deletion(form):
     # Yes this is slightly ugly, but due to the queue-like nature of FieldList there's no cleaner way
     modified = False

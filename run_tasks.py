@@ -36,12 +36,13 @@ def main():
     jobs = b''
     if not args['-d']:
         for schedule in schedules:
-            jobs += b'# ' + app.config.get('CRONTAB_SEPARATOR').encode('utf8') + b'\n'
-            for run in schedule.runs:
-                cronspec = define_cronspec(run.start, run.day, schedule.start_cmd)
-                cronspec += define_cronspec(run.stop, run.day, schedule.stop_cmd)
-                jobs += cronspec.encode('utf8')
-            jobs += b'# ' + app.config.get('CRONTAB_SEPARATOR').encode('utf8') + b'\n'
+            if schedule.enabled:
+                jobs += b'# ' + app.config.get('CRONTAB_SEPARATOR').encode('utf8') + b'\n'
+                for run in schedule.runs:
+                    cronspec = define_cronspec(run.start, run.day, schedule.start_cmd)
+                    cronspec += define_cronspec(run.stop, run.day, schedule.stop_cmd)
+                    jobs += cronspec.encode('utf8')
+                jobs += b'# ' + app.config.get('CRONTAB_SEPARATOR').encode('utf8') + b'\n'
     full_tab = orig_head + jobs + orig_tail
     process = subprocess.Popen([CRONTAB, '-'], stdin=subprocess.PIPE)
     process.communicate(full_tab)
