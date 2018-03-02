@@ -30,7 +30,7 @@ os.urandom(24)
 ```
 Copy the resulting (byte)string, open config.py and paste the copied value as a value for SECRET_KEY. 
 
-Then you should create a database using ```db_create.py``` and then ```db_migrate.py```.
+Then you should create a database using ```db_create.py```.
 
 ## Running
 You can easily start a development server using:
